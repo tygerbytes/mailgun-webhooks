@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace MailGunWebhooks
+namespace MailGunWebhooks.Payload
 {
-    public class PayloadSignature
+    public class HmacSignature
     {
         public int Timestamp { get; set; }
         public string Token { get; set; }

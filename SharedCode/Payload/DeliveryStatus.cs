@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace MailGunWebhooks
+namespace MailGunWebhooks.Payload
 {
-    public class PayloadDeliveryStatus
+    public class DeliveryStatus
     {
         public bool Tls { get; set; }
         

@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace MailGunWebhooks
+namespace MailGunWebhooks.Payload
 {
-    public class PayloadMessageHeaders
+    public class MessageHeaders
     {
         [JsonProperty(PropertyName = "message-id")]
         public string MessageId { get; set; }

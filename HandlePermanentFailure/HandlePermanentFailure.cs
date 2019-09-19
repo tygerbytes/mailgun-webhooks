@@ -6,6 +6,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using MailGunWebhooks.Payload;
 
 namespace MailGunWebhooks
 {
@@ -22,7 +23,7 @@ namespace MailGunWebhooks
 
             // Deserialize request
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var payload = JsonConvert.DeserializeObject<MailGunWebookPayload>(requestBody);
+            var payload = JsonConvert.DeserializeObject<WebhookPayload>(requestBody);
             log.LogInformation(Utils.ToJson(payload));
 
             // Verify signature
@@ -45,7 +46,7 @@ namespace MailGunWebhooks
             return new OkObjectResult($"Whew, thanks for the FYI 😊!");
         }
 
-        private static EmailMessage BuildFailureAlertEmail(FuncConfig config, string toEmailAddress, PayloadEventData eventData)
+        private static EmailMessage BuildFailureAlertEmail(FuncConfig config, string toEmailAddress, EventData eventData)
         {
             return new EmailMessage
             {

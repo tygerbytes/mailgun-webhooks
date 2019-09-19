@@ -1,6 +1,6 @@
-﻿namespace MailGunWebhooks
+﻿namespace MailGunWebhooks.Payload
 {
-    public class PayloadGeolocation
+    public class Geolocation
     {
         public string Country { get; set; }
         public string Region { get; set; }

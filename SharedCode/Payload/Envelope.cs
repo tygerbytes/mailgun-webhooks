@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace MailGunWebhooks
+namespace MailGunWebhooks.Payload
 {
-    public class PayloadEnvelope
+    public class Envelope
     {
         [JsonProperty(PropertyName = "sending-ip")]
         public string SendingIp { get; set; }

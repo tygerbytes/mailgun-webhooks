@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace MailGunWebhooks
+namespace MailGunWebhooks.Payload
 {
-    public class PayloadEventData
+    public class EventData
     {
         [JsonConverter(typeof(StringEnumConverter))]
         public MailGunEvent Event { get; set; }
@@ -11,8 +11,8 @@ namespace MailGunWebhooks
         public string Id { get; set; }
         public string Severity { get; set; }
         public string Reason { get; set; }
-        public PayloadFlags Flags { get; set; }
-        public PayloadGeolocation GeoLocation { get; set; }
+        public Flags Flags { get; set; }
+        public Geolocation GeoLocation { get; set; }
 
         [JsonProperty(PropertyName = "ip")]
         public string IpAddress { get; set; }
@@ -21,17 +21,17 @@ namespace MailGunWebhooks
 
         [JsonProperty(PropertyName = "recipient-domain")]
         public string RecipientDomain { get; set; }
-        public PayloadEnvelope Envelope { get; set; }
+        public Envelope Envelope { get; set; }
 
         [JsonProperty(PropertyName = "log-level")]
         public string LogLevel { get; set; }
 
         [JsonProperty(PropertyName = "client-info")]
-        public PayloadClientInfo ClientInfo { get; set; }
+        public ClientInfo ClientInfo { get; set; }
 
-        public PayloadMessage Message { get; set; }
+        public Message Message { get; set; }
 
         [JsonProperty(PropertyName = "delivery-status")]
-        public PayloadDeliveryStatus DeliveryStatus { get; set; }
+        public DeliveryStatus DeliveryStatus { get; set; }
     }
 }

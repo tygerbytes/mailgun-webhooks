@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace MailGunWebhooks
+namespace MailGunWebhooks.Payload
 {
-    public class PayloadFlags
+    public class Flags
     {
         [JsonProperty(PropertyName = "is-routed")]
         public bool IsRouted { get; set; }

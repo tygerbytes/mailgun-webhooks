@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace MailGunWebhooks
+namespace MailGunWebhooks.Payload
 {
-    public class PayloadClientInfo
+    public class ClientInfo
     {
         [JsonProperty(PropertyName = "client-name")]
         public string ClientName { get; set; }
