@@ -1,4 +1,4 @@
-﻿namespace MailGunWebhooks.Payload
+﻿namespace MailgunWebhooks.Payload
 {
     public class Message
     {

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace MailGunWebhooks.Payload
+namespace MailgunWebhooks.Payload
 {
     public class EventData
     {

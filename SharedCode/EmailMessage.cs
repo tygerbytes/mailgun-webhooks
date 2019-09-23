@@ -1,18 +1,15 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using SendGrid.Helpers.Mail;
 
-namespace MailGunWebhooks
+namespace MailgunWebhooks
 {
     public class EmailMessage
     {
-        public string From { get; set; }
+        public EmailAddress From { get; set; }
 
-        public string To { get; set; }
+        public EmailAddress To { get; set; }
 
         public string Subject { get; set; }
 
-        public string Message { get; set; }
-
-        public string ContentType { get; set; }
+        public string Body { get; set; }
     }
 }

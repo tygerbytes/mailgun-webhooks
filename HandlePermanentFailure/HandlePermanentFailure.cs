@@ -6,9 +6,10 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using MailGunWebhooks.Payload;
+using MailgunWebhooks.Payload;
+using SendGrid.Helpers.Mail;
 
-namespace MailGunWebhooks
+namespace MailgunWebhooks
 {
     public static class HandlePermanentFailure
     {
@@ -16,10 +17,9 @@ namespace MailGunWebhooks
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "tygerbytes/mailgun/epicpermfail")] HttpRequest req,
             [Queue("email-outbox")]IAsyncCollector<EmailMessage> emailQueue,
-            ILogger log,
-            ExecutionContext context)
+            ILogger log)
         {
-            var config = await new FuncConfig().InitAsync(context);
+            var config = FuncConfig.GetInstance();
 
             // Deserialize request
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
@@ -46,15 +46,14 @@ namespace MailGunWebhooks
             return new OkObjectResult($"Whew, thanks for the FYI 😊!");
         }
 
-        private static EmailMessage BuildFailureAlertEmail(FuncConfig config, string toEmailAddress, EventData eventData)
+        private static EmailMessage BuildFailureAlertEmail(FuncConfig config, EmailAddress toEmailAddress, EventData eventData)
         {
             return new EmailMessage
             {
                 From = config.FromEmailAddress,
                 To = toEmailAddress,
                 Subject = "❌Mailgun failure alert",
-                ContentType = "application/text",
-                Message = Utils.ToJson(eventData)
+                Body = Utils.ToJson(eventData)
             };
         }
     }

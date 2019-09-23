@@ -1,4 +1,4 @@
-﻿namespace MailGunWebhooks
+﻿namespace MailgunWebhooks
 {
     public enum MailGunEvent
     {

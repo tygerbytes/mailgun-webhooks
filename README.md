@@ -1,10 +1,20 @@
-﻿# MailGun Webhooks with Azure Functions
+﻿# MailGun Webhook email alerts with Azure Functions
 
-Use an azure function to intercept your MailGun webhooks.
+Use an Azure function to intercept your MailGun webhooks.
 
-As an example, the `HandlePermanentFailure` function creates email messages and adds them to an Azure Job Storage queue. You could create another AzureFunction to process this queue to actually send out the alert emails.
+## Overview
 
-The request body payload is deserialized to POCOs to make working with the data easier and more type-safe.
+* `HandlePermanentFailure` receives the "Permanent Failure" webhook from MailGun and adds an outgoing message to the 'email-outbox' storage queue.
+* `DrainOutbox` processes the 'email-outbox' queue, sending alert emails to `alert-email-addresses` via the SendGrid API.
+
+## MailGun POCOs!
+
+The request body payload is deserialized to c# classes to make working with the data easier and more type-safe.
+
+## Why SendGrid for the email alerts?
+
+1. If MailGun is having issues, it might make sense to send the alerts via another channel
+2. SendGrid is easier to work with in Azure. There's a nuget package and everything. :)
 
 ## Getting Started
 
@@ -16,10 +26,11 @@ The request body payload is deserialized to POCOs to make working with the data 
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "ALERT_EMAIL_ADDRESSES": "{ This email addresses to alert, separated by semicolons ';' }",
-    "FROM_EMAIL_ADDRESS": "{ Your email address }",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "MAILGUN_WEBHOOK_SIGNING_KEY": "{ Get this from https://app.mailgun.com/app/account/security/api_keys }"
+	"FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "alert-email-addresses": "{ This email addresses to alert, separated by semicolons ';' }",
+    "from-email-address": "{ Your email address }",    
+    "mailgun-webhook-signing-key": "{ Get this from https://app.mailgun.com/app/account/security/api_keys }",
+	"sendgrid-api-key": { Your API key for SendGrid }
   }
 }
 ```

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MailGunWebhooks.Payload
+namespace MailgunWebhooks.Payload
 {
     public class Envelope
     {
