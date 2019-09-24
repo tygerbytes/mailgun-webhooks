@@ -4,14 +4,16 @@ Use an Azure function to intercept your MailGun webhooks.
 
 ## Overview
 
-* `HandleWebhook` receives any webhook from MailGun, then invokes the appropriate response strategy based on the `MailGunEvent` type. For example, it might adds an outgoing alert email message to the 'email-outbox' storage queue.
+* `HandleWebhook` receives any webhook from MailGun, then invokes the appropriate response strategy based on the `MailGunEvent` type. For example, it might add outgoing alert email messages to the 'email-outbox' storage queue.
 * `DrainOutbox` processes the 'email-outbox' queue, sending queued emails via the SendGrid API.
 
-## MailGun POCOs!
+## Features
+
+### MailGun POCOs!
 
 The request body payload is deserialized to C# classes to make working with the data easier and more type-safe.
 
-## Why SendGrid for the email alerts?
+### Why SendGrid for the email alerts?
 
 1. If MailGun is having issues, it might make sense to send the alerts via another channel
 2. SendGrid is easier to work with in Azure. There's a nuget package and everything. :)
