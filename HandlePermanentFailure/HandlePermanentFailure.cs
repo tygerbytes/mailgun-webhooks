@@ -19,7 +19,7 @@ namespace MailgunWebhooks
             [Queue("email-outbox")]IAsyncCollector<EmailMessage> emailQueue,
             ILogger log)
         {
-            var config = FuncConfig.GetInstance();
+            var config = FuncConfig.Instance;
 
             // Deserialize request
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();

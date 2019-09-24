@@ -7,18 +7,15 @@ namespace MailgunWebhooks
 {
     public class FuncConfig
     {
-        private readonly static FuncConfig config
-            = new FuncConfig
+        private readonly static Lazy<FuncConfig> _config
+            = new Lazy<FuncConfig>(() => new FuncConfig
             {
                 MailgunWebhookSigningKey = Environment.GetEnvironmentVariable("mailgun-webhook-signing-key"),
                 AlertEmailAddresses = SplitEmailAddresses(Environment.GetEnvironmentVariable("alert-email-addresses")),
                 FromEmailAddress = SplitEmailAddresses(Environment.GetEnvironmentVariable("from-email-address")).Single()
-            };
+            });
 
-        public static FuncConfig GetInstance()
-        {
-            return config;
-        }
+        public static FuncConfig Instance => _config.Value;
 
         internal string MailgunWebhookSigningKey { get; private set; }
 

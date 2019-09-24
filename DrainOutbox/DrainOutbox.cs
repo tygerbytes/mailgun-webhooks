@@ -13,7 +13,7 @@ namespace MailgunWebhooks.DrainOutbox
             [SendGrid( ApiKey = "sendgrid-api-key")] IAsyncCollector<SendGridMessage> message,
             ILogger log)
         {
-            var config = FuncConfig.GetInstance();
+            var config = FuncConfig.Instance;
 
             log.LogInformation($"Processing email message from work queue: {Utils.ToJson(queuedEmail)}");
 
