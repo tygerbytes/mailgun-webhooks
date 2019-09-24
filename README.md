@@ -26,11 +26,11 @@ The request body payload is deserialized to c# classes to make working with the 
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-	"FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "alert-email-addresses": "{ This email addresses to alert, separated by semicolons ';' }",
     "from-email-address": "{ Your email address }",    
     "mailgun-webhook-signing-key": "{ Get this from https://app.mailgun.com/app/account/security/api_keys }",
-	"sendgrid-api-key": { Your API key for SendGrid }
+    "sendgrid-api-key": "{ Your API key for SendGrid }"
   }
 }
 ```
