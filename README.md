@@ -4,12 +4,12 @@ Use an Azure function to intercept your MailGun webhooks.
 
 ## Overview
 
-* `HandlePermanentFailure` receives the "Permanent Failure" webhook from MailGun and adds an outgoing message to the 'email-outbox' storage queue.
-* `DrainOutbox` processes the 'email-outbox' queue, sending alert emails to `alert-email-addresses` via the SendGrid API.
+* `HandleWebhook` receives any webhook from MailGun, then invokes the appropriate response strategy based on the `MailGunEvent` type. For example, it might adds an outgoing alert email message to the 'email-outbox' storage queue.
+* `DrainOutbox` processes the 'email-outbox' queue, sending queued emails via the SendGrid API.
 
 ## MailGun POCOs!
 
-The request body payload is deserialized to c# classes to make working with the data easier and more type-safe.
+The request body payload is deserialized to C# classes to make working with the data easier and more type-safe.
 
 ## Why SendGrid for the email alerts?
 
@@ -37,6 +37,7 @@ The request body payload is deserialized to c# classes to make working with the 
 
 3. Run the project in Visual Studio (*not Visual Studio Code if you want the full development experience*)
 4. Run ngrok and point it against your visual studio dev server
-5. Head over to the mailgun webhooks page for your site, for example https://app.mailgun.com/app/sending/domains/example.com/webhooks. From there you can paste in your URL and see what happens. As coded, the URL might look something like https://deadbeef.ngrok.io/api/tygerbytes/mailgun/epicpermfail.
+5. Head over to the mailgun webhooks page for your site, for example https://app.mailgun.com/app/sending/domains/example.com/webhooks. From there you can paste in your URL and see what happens. As coded, the URL might look something like https://deadbeef.ngrok.io/api/tygerbytes/mailgun/webhook.
+6. Create new implementations of `IResponseStrategy` to customize all the response things.
 
 Have fun. 😊
