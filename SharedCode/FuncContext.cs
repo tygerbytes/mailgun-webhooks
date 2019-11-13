@@ -8,5 +8,6 @@ namespace MailgunWebhooks
         public FuncConfig Config { get; set; }
         public IAsyncCollector<EmailMessage> EmailQueue { get; set; }
         public ILogger Logger { get; set; }
+        public SpamFilter SpamFilter { get; set; }
     }
 }

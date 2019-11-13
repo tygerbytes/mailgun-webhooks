@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MailgunWebhooks.Payload;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace MailgunWebhooks.ResponseStrategy
 {
@@ -18,6 +19,12 @@ namespace MailgunWebhooks.ResponseStrategy
             var e = payload.EventData.Event;
             var subject = $"{e.ToEmoji()} Mailgun Alert ({e})";
             var bodyJson = Utils.ToJson(payload.EventData);
+
+            if (context.SpamFilter.IsSpam(payload))
+            {
+                context.Logger.LogInformation("Spam filter tripped.");
+                return;
+            }
 
             foreach (var email in context.Config.AlertEmailAddresses)
             {

@@ -24,7 +24,8 @@ namespace MailgunWebhooks
             {
                 Config = config,
                 EmailQueue = emailQueue,
-                Logger = log
+                Logger = log,
+                SpamFilter = SpamFilter.GetInstance()
             };
 
             var payload = await DeserializeRequestPayload(req);
